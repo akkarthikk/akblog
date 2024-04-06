@@ -1,20 +1,14 @@
-version: "3"
+version: '3'
 services:
   api:
-    build: 
+    build:
       context: ./api
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile-api
     ports:
       - "4000:4000"
-    depends_on:
-      - app
-  app:
-    build: 
-      context: ./app
-      dockerfile: Dockerfile
+  application:
+    build:
+      context: ./application
+      dockerfile: Dockerfile-application
     ports:
       - "3000:3000"
-    volumes:
-      - ./public:/app/public
-      - ./views:/app/views
-      - ./node_modules:/app/node_modules
