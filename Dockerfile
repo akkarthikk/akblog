@@ -1,16 +1,20 @@
-# Use the official Node.js image for both apps
-FROM node:latest AS api
-WORKDIR /app/api
-COPY package*.json ./
-RUN npm install
-COPY . .
-EXPOSE 4000
-CMD ["npm", "start"]
+# Use Node.js as the base image
+FROM node:14
 
-FROM node:latest AS application
-WORKDIR /app/app
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
+
+# Copy the rest of the application code to the working directory
 COPY . .
-EXPOSE 3000
-CMD ["npm", "start"]
+
+# Expose the port your app runs on
+EXPOSE 4000
+
+# Command to run the application
+CMD ["node", "solution.js"]
